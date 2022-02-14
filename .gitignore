@@ -194,3 +194,15 @@ mlruns/*
 seldon-models/*
 experiments/buckets/*
 experiments/dbdata/*
+experiments/mlruns/0/meta.yaml
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/meta.yaml
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/params/alpha
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/params/l1_ratio
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.gitRepoURL
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.project.entryPoint
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.project.env
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.source.git.commit
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.source.git.repoURL
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.source.name
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.source.type
+experiments/mlruns/0/d60c9d5a081b451fa7602fc9f2abd8b6/tags/mlflow.user

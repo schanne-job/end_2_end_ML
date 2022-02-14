@@ -23,10 +23,10 @@ Another aspect is, the training data is added as a file. In a real setup, it won
 
 - Install Docker for Desktop
 - Start from clean slate
-    - `docker-compose down`
-    - `docker system prune --force --volumes`
-
-- `docker-compose --env-file ./env.txt up`
+    - `> docker-compose down`
+    - `> docker system prune --force --volumes`
+- `> copy env.txt .env`
+- `> docker-compose --env-file ./.env up`
 
 This command should give, 
 
@@ -35,10 +35,10 @@ This command should give,
 
 Run the training script available in `experiments` folder to simualate the training in MLflow. 
 
-```bash
-cd experiments 
-python3 train.py
-```
+- Install Anaconda (with python + pip)
+    - `> cd experiments`
+    - `> pip install mlflow{extras]`
+    - `> python train.py`
 
 You can see the experiments in `localhost:5000`, metrics and the artifacts in `localhost:9000`. This is configured in the `train.py`. If you want to run locally, edit the script.
 

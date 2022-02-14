@@ -44,6 +44,18 @@ You can see the experiments in `localhost:5000`, metrics and the artifacts in `l
 
 Note: For the first time, when you `docker-compose up` there could be errors with MLflow and SQL DB. In that case, stop the terminal and rerun the `up` command. Follow the issue at [here](https://github.com/mlflow/mlflow/issues/1761).
 
+### Machine Learning App
+
+- Copy model
+    - `> copy experiments\buckets\mlflow\<INT>\<HASH>\artifacts\rf-regressor\model.pkl ml-app
+	- `> cd ml-app`
+    - `> docker build -t seldon-app .`
+    - `> docker run -p 5001:5000 -it seldon-app`
+    - `> python tests.py`	
+	
+	
+---
+
 ### Deployment in Kubernates
 
 Once we've the trained models which meets the metric criterias, we can deploy it.

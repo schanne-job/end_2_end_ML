@@ -195,3 +195,4 @@ seldon-models/*
 experiments/buckets/*
 experiments/dbdata/*
 experiments/mlruns/*
+ml-app/model.pkl

@@ -26,7 +26,7 @@ Another aspect is, the training data is added as a file. In a real setup, it won
     - `docker-compose down`
     - `docker system prune --force --volumes`
 
-- `docker-compose --env-file ./.env up`
+- `docker-compose --env-file ./env.txt up`
 
 This command should give, 
 

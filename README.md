@@ -53,7 +53,9 @@ Note: For the first time, when you `docker-compose up` there could be errors wit
     - `> docker run -p 5001:5000 -it seldon-app`
     - `> python tests.py`	
 	
-	
+*Compare howto:* https://docs.seldon.io/projects/seldon-core/en/latest/workflow/serving.html
+*Important:* Use the same Python version for training and providing of the prediction webservice!
+
 ---
 
 ### Deployment in Kubernates

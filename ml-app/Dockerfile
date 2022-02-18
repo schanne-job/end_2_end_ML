@@ -16,5 +16,6 @@ ENV API_TYPE REST
 ENV SERVICE_TYPE MODEL
 ENV PERSISTANCE 0
 
-#CMD tail -f /dev/null
-CMD exec seldon-core-microservice ${MODEL_NAME} --service-type ${SERVICE_TYPE}
+CMD tail -f /dev/null
+# seldon-core-microservice Model --service-type MODEL
+#CMD exec seldon-core-microservice ${MODEL_NAME} --service-type ${SERVICE_TYPE}

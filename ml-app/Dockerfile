@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.9-slim
 
 ARG http_proxy=http://host.docker.internal:3128
 ARG https_proxy=http://host.docker.internal:3128
@@ -18,4 +18,5 @@ ENV PERSISTANCE 0
 
 CMD tail -f /dev/null
 # seldon-core-microservice Model --service-type MODEL
+# seldon-core-microservice MyModel --service-type MODEL
 #CMD exec seldon-core-microservice ${MODEL_NAME} --service-type ${SERVICE_TYPE}

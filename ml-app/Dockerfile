@@ -1,8 +1,8 @@
 FROM python:3.9-slim
 
-ARG http_proxy=http://host.docker.internal:3128
-ARG https_proxy=http://host.docker.internal:3128
-ARG no_proxy=127.0.0.1,localhost,.bosch.com
+#ARG http_proxy=http://host.docker.internal:3128
+#ARG https_proxy=http://host.docker.internal:3128
+#ARG no_proxy=127.0.0.1,localhost,.bosch.com
 
 WORKDIR /app
 COPY ./requirements.txt /app
@@ -16,7 +16,7 @@ ENV API_TYPE REST
 ENV SERVICE_TYPE MODEL
 ENV PERSISTANCE 0
 
-CMD tail -f /dev/null
-# seldon-core-microservice Model --service-type MODEL
-# seldon-core-microservice MyModel --service-type MODEL
+#CMD tail -f /dev/null
+CMD exec seldon-core-microservice Model --service-type MODEL
+#CMD exec seldon-core-microservice MyModel --service-type MODEL
 #CMD exec seldon-core-microservice ${MODEL_NAME} --service-type ${SERVICE_TYPE}

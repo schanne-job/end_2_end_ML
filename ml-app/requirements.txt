@@ -1,2 +1,2 @@
 sklearn
-seldon-core
+seldon-core[extras]

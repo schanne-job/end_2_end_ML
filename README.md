@@ -35,7 +35,7 @@ This command should give,
 
 Run the training script available in `experiments` folder to simualate the training in MLflow. 
 
-- Install Anaconda (with python + pip)
+- Install Anaconda (with python + pip, version 3.9.X)
     - `> cd experiments`
     - `> pip install mlflow[extras]`
     - `> python train.py`
@@ -50,9 +50,9 @@ Note: For the first time, when you `docker-compose up` there could be errors wit
     - `> copy experiments\buckets\mlflow\<INT>\<HASH>\artifacts\rf-regressor\model.pkl ml-app
 	- `> cd ml-app`
     - `> docker build -t seldon-app .`
-    - `> docker run -p 5001:5000 -it seldon-app`
+    - `> docker run -p 9002:9000 -it seldon-app`
     - `> python tests.py`	
-	
+
 *Compare howto:* https://docs.seldon.io/projects/seldon-core/en/latest/workflow/serving.html
 *Important:* Use the same Python version for training and providing of the prediction webservice!
 

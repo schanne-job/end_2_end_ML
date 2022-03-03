@@ -35,7 +35,7 @@ This command should give,
 
 Run the training script available in `experiments` folder to simualate the training in MLflow. 
 
-- Install Anaconda (with python + pip, version 3.9.X)
+- Install Anaconda (with python + pip, version 3.8.X)
     - `> cd experiments`
     - `> pip install mlflow[extras]`
     - `> python train.py`

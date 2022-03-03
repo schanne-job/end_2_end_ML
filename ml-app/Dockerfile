@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.8-slim
 
 ARG http_proxy=http://host.docker.internal:3128
 ARG https_proxy=http://host.docker.internal:3128

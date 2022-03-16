@@ -7,8 +7,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
 os.environ['MLFLOW_S3_ENDPOINT_URL'] = "http://localhost:9000"
-os.environ['AWS_ACCESS_KEY_ID'] = "minio"
-os.environ['AWS_SECRET_ACCESS_KEY'] = "minio123"
+os.environ['AWS_ACCESS_KEY_ID'] = "minioadmin"
+os.environ['AWS_SECRET_ACCESS_KEY'] = "minioadmin"
 
 mlflow.set_tracking_uri("http://localhost:5000")
 df = pd.read_csv("kc_house_data.csv") 

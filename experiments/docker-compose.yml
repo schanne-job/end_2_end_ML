@@ -32,7 +32,8 @@ services:
           - .env
       entrypoint: >
           /bin/sh -c "
-          while ! nc -z minio 9000; do echo 'Wait minio to startup...' && sleep 0.1; done; sleep 5 &&
+          echo "Wait 5 sec. minio to startup..."; 
+          sleep 5;
           /usr/bin/mc config host add minio http://minio:9000 ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY};
           /usr/bin/mc rm -r --force minio/mlflow;
           /usr/bin/mc mb minio/mlflow;
@@ -59,6 +60,8 @@ services:
     build: .
     image: mlflow_server
     container_name: mlflow_server
+    depends_on: 
+        - db
     expose:
         - "5000"
     ports:
@@ -70,8 +73,6 @@ services:
         - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
         - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     command: mlflow server --backend-store-uri mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE} --default-artifact-root s3://mlflow/ --host 0.0.0.0
-    depends_on: 
-        - db
     
 networks:
     mlflow_network:

@@ -7,19 +7,13 @@ This README depicts a CLI setup guide for Windows. Things might look different i
 First and foremost step is setting up a reproducable ML experimentation system. For that we need, 
 
 1. An ML experiment tracking system - <font color='green'>MLflow</font>
-2. A database to store the experimentation tracking system data - <font color='green'> MySQL DB</font>
+2. A database to store the experimentation tracking system data - <font color='green'>MySQL DB</font>
 3. A local object store to keep the artifacts of each experiment -  <font color='green'>MinIO</font>
 
 ![Training Flow Chart](images/mlflow_train.png "seldon training")
 
-Here we are setting everything using dockers, so all three above can be actualized as containers. In the `experiments` folder, we have a `Dockerfile` which will setup a container that has
-
-1. Training script 
-2. Training data 
-
-There are provisions to add test scripts, if required. 
-
-Another aspect is, the training data is added as a file. In a real setup, it won't be the case. The training data could be streaming data, or stored in a DB or anything. 
+Here we are setting everything using dockers, so all three above can be actualized as containers.<br/>
+In the `mflow` folder, we have a `Dockerfile` which loads neccessary Python modules for mlflow's tracking feature. The MySQL database is stored in `db` and in `minio\buckets` all artifacts of trainings are stored.
 
 - Install Docker for Desktop
 - Start from clean state
@@ -27,7 +21,7 @@ Another aspect is, the training data is added as a file. In a real setup, it won
     - `cmd> docker system prune --force --volumes`
     - `cmd> for /F %i in ('docker images -a -q') do docker rmi -f %i`
 - `cmd> copy env.txt .env`
-- `cmd> docker compose --env-file ./.env up -d`
+- `cmd> docker compose -f docker-start.yml up`
 
 This command should give, 
 
@@ -35,30 +29,38 @@ This command should give,
 2. MinIO dashboard at `localhost:9000`
 3. MySQL server at `localhost:3306`
 
-Run the training script available in `experiments` folder to simualate the training in MLflow. 
+The training script `train.py` is available in `train` folder to simualate the training in MLflow. 
 
-Open Anaconda Propmt for Python 3.8.X
+Open Anaconda Prompt with Python 3.8.X
 ```bash
-cd experiments
-python train.py
+py38> cd train
+py38> pip install -r requirements.txt
+py38> python train.py
 ```
 
-You can see the experiments in `localhost:5000`, metrics and the artifacts in `localhost:9000`. This is configured in the `train.py`. If you want to run locally, edit the script.
+You can see the experiments in `localhost:5000`, metrics and the artifacts in `localhost:9000`. <br/>
+The trained model can be copied (or downloaded) into the final model serving container based on seldon-core-microservice:
 
 ```bash
-copy .\buckets\mlflow\0\<hash>\artifacts\rf-regressor\model.pkl ..\ml-app
-cd ..\ml-app
-docker build -t seldon-app .
-docker run -p 9002:9000 -it seldon-app
+cmd> copy .\minio\buckets\mlflow\0\<hash>\artifacts\rf-regressor\model.pkl .\ml-app
+
+cmd> cd .\ml-app
+cmd> python download.py
 ```
 
-Test this app:
+Finally start this model serving with docker compose:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d "{\"data\": { \"ndarray\": [[1,2,3,4,5,6,7]]}}" http://127.0.0.1:9002/predict
+cmd> docker run -p 9002:9000 -it seldon-app
 ```
 
-An alternative model is the identity prediction with `MyModel`, replace in Dockerfile:
+Test this app from command line with curl:
+
+```bash
+cmd> curl -X POST -H "Content-Type: application/json" -d "{\"data\": { \"ndarray\": [[1,2,3,4,5,6,7,8,9,10,11]]}}" http://127.0.0.1:6000/predict
+```
+
+An alternative model is the identity prediction with `MyModel`, replace in `ml-app\Dockerfile`:
 
 ```bash
 ENV MODEL_NAME Model -> ENV MODEL_NAME MyModel

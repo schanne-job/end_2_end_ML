@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  ml-app:
+    container_name: ml-app
+    build: ./ml-app
+    ports:
+      - 6000:9000 
+    networks: 
+      - mlflow_network
+    env_file:
+      - .env
+
+  test:
+    container_name: test
+    depends_on:
+      - ml-app
+    image: python:3.8-slim
+    networks: 
+      - mlflow_network
+    env_file:
+      - .env
+
+networks:
+  mlflow_network:
